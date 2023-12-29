@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="HTML, CSS, JavaScript, API">
+  <meta name="description" content="Uber Eats Clone">
+  <meta name="author" content="Hatem Soliman">
+  <meta http-equiv="refresh" content="600">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel = "stylesheet" href = "style-2.css">
+  
+  <script defer src="script.js"></script>
+  <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+
+  <title>Uber Cuisine | All you can eat</title>
+</head>
+
+<body>
+  <!-- Main Navigation Bar -->
+  <nav>
+    <div class="btn__menu">
+      <button class="btn__menu" onclick="openMenu()">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="menu__backdrop">
+        <button class="btn__menu btn__menu--close" onclick="closeMenu()">
+          <i class="fas fa-times"></i>
+        </button>
+        <div id="sign-out__status" class="account__container">
+          <figure class="account__img--wrapper">
+            <i class="far fa-user-circle account__img"></i>
+          </figure>
+          <div class="account__preview">
+            <span class="account__name">User#097651727</span>
+            <span>
+              <button id="sign-in" class="account__viewer">Sign in</butt>
+            </span>
+          </div>
+        </div>
+        <div id="sign-in__status" class="account__container--logged">
+          <figure class="account__img--wrapper-logged">
+            <img src="./Assets/man-avatar.png" alt="Avatar" class="account__img--logged" title="Cartoon icons created by GeekClick - Flaticon">
+          </figure>
+          <div class="account__preview--logged">
+            <span class="account__name--logged">Greg Heffley</span>
+            <span>
+              <button id="sign-out" class="account__viewer--logged no-cursor" href="">View account</button>
+            </span>
+          </div>
+        </div>
+        <ul class="menu__links">
+          <li class="menu__list menu__list--two">
+            <i class="menu__link--icon fas fa-ticket-alt"></i>
+            <a href="#home-section" class="menu__link no-cursor" onclick="closeMenu()">Orders</a>
+          </li>
+          <li class="menu__list menu__list--two">
+            <i class="menu__link--icon fas fa-heart"></i>
+            <a href="#about-section" class="menu__link no-cursor" onclick="closeMenu()">Favourites</a>
+          </li>
+          <li class="menu__list menu__list--two">
+            <i class="menu__link--icon fas fa-wallet"></i>
+            <a href="#projects-section" class="menu__link no-cursor" onclick="closeMenu()">Wallet</a>
+          </li>
+          <li class="menu__list menu__list--two">
+            <i class="menu__link--icon far fa-life-ring"></i>
+            <a href="#contact-section" class="menu__link no-cursor" onclick="closeMenu()">Help</a>
+          </li>
+          <li class="menu__list menu__list--two">
+            <i class="menu__link--icon fas fa-tags"></i>
+            <a href="#contact-section" class="menu__link no-cursor" onclick="closeMenu()">Promotions</a>
+          </li>
+          <li class="menu__list menu__list--two">
+            <i class="menu__link--icon fab fa-uber"></i>
+            <a href="#contact-section" class="menu__link no-cursor" onclick="closeMenu()">Uber One</a>
+          </li>
+          <li class="menu__list menu__list--two">
+            <i class="menu__link--icon fas fa-gift"></i>
+            <a href="#contact-section" class="menu__link no-cursor" onclick="closeMenu()">Invite friends</a>
+          </li>
+        </ul>
+        <button id="sign-in-two" class="menu__btn--sign">Sign in</button>
+        <button id="sign-out-two" class="menu__btn--sign">Sign out</button>
+      </div>
+    </div>
+    <a href="index.html">
+      <span class="logo">Uber <span class="orange"><b>Cuisine</b></span></span>
+    </a>
+    <div class="address__search--wrapper">
+      <i class="fas fa-map-marker-alt"></i>
+      <input class="address__search" type="search" placeholder="Enter delivery address">
+    </div>
+    <div class="item__search--wrapper">
+      <button type="submit" id="search-btn">
+        <i class="fas fa-search"></i>
+      </button>
+      <input id="search-input" class="item__search" type="text" placeholder="Food, Ingredients, etc">
+    </div>
+    <button id="item__cart--btn" class="item__cart--btn">
+      <i class="fas fa-shopping-cart"></i>
+      <span class="item__cart--name">Cart •</span>
+      <span id="item__cart--count" class="item__cart--count">0</span>
+    </button>
+  </nav>
+  <div id="cart-modal" class="modal">
+    <div class="modal__items--list">
+      <div class="modal__items--list--title">Your Cart :</div>
+      <div class="modal__items--list--sub-titles">
+        <div class="modal__items--list--subtitle">Product</div>
+        <div class="modal__items--list--subtitle">Price</div>
+        <div class="modal__items--list--subtitle">Quantity</div>
+        <div class="modal__items--list--subtitle">Total</div>
+      </div>
+      <div class="modal__items--list--content">
+        <figure id="empty__cart--wrapper" class="modal__items--list--img--wrapper">
+          <img src="./Assets/empty cart.svg" alt="Empty Cart" id="empty-cart" class="modal__items--list--img">
+        </figure>
+        <h4 class="modal__items--list--sub-title">is empty</h4>
+      </div>
+    </div>
+    <div class="modal__logistics">
+      <div class="modal__items--cost">Your Total Cost : <span class="modal__items--cost--number">0</span></div>
+      <button id="order__btn" class="modal__to--checkout--btn">
+        <a class="modal__to--checkout--anchor">Place my order</a>
+      </button>
+      <figure class="modal__logistics--security--wrapper">
+        <img class="modal__logistics--security" src="./Assets/card_payment_icons_stripe_mobile.png" alt="stripe secure payements">
+      </figure>
+    </div>
+  </div>
+
+  <!-- Food Icons Navigation Bar -->
+  <div class="container">
+    <ul class="category__list">
+      <li class="category__item">
+        <img class="category__img" src="./Assets/deals.png" alt="Deals">
+        <span class="category__name">Deals</span>
+      </li>
+      <li class="category__item">
+        <img class="category__img" src="./Assets/salad.png" alt="Salads" title="Salad icons created by Freepik - Flaticon">
+        <span class="category__name">Salads</span>
+      </li>
+      <li class="category__item">
+        <img class="category__img" src="./Assets/tteok.png" alt="Meals" title="Korea icons created by justicon - Flaticon">
+        <span class="category__name">Plates</span>
+      </li>
+      <li class="category__item">
+        <img class="category__img" src="./Assets/burger.png" alt="Sanwiches" title="Burger icons created by Freepik - Flaticon">
+        <span class="category__name">Sandwiches</span>
+      </li>
+      <li class="category__item">
+        <img class="category__img" src="./Assets/fish.png" alt="Seafood" title="Fish icons created by Freepik - Flaticon">
+        <span class="category__name">Seafood</span>
+      </li>
+      <li class="category__item">
+        <img class="category__img" src="./Assets/japanese-food.png" alt="Sushi" title="Japanese food icons created by amonrat rungreangfangsai - Flaticon">
+        <span class="category__name">Sushi</span>
+      </li>
+      <li class="category__item">
+        <img class="category__img" src="./Assets/pizza.png" alt="Pizza" title="Pizza icons created by Freepik - Flaticon">
+        <span class="category__name">Pizzas</span>
+      </li>
+      <li class="category__item">
+        <img class="category__img" src="./Assets/cupcake.png" alt="Dessert" title="Dessert icons created by Freepik - Flaticon">
+        <span class="category__name">Dessert</span>
+      </li>
+      <li class="category__item">
+        <img class="category__img" src="./Assets/fruits.png" alt="Fruits" title="Fruits icons created by Freepik - Flaticon">
+        <span class="category__name">Fruits</span>
+      </li>
+      <li class="category__item">
+        <img class="category__img" src="./Assets/drink.png" alt="Drinks" title="Drink icons created by Smashicons - Flaticon">
+        <span class="category__name">Drinks</span>
+      </li>
+      <li class="category__item special">
+        <figure class="search__wrapper--mobile">
+          <a href="index.html">
+            <i id="gps__icon" class="fas fa-map-marker-alt search__icon--mobile"></i>
+          </a>
+        </figure>
+      </li>
+      <li class="category__item special">
+        <figure class="search__wrapper--mobile">
+          <a href="index-2.html">
+            <i class="fas fa-search search__icon--mobile"></i>
+          </a>
+        </figure>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Separator -->
+  <hr class="separators">
+  <div class="container">
+    <div class="row">
+      <div class="item__search--wrapper item__search--wrapper--mobile">
+        <button type="submit" id="search-btn">
+          <i class="fas fa-search"></i>
+        </button>
+        <input id="search-input" class="item__search" type="text" placeholder="Food, Ingredients, etc">
+      </div>
+    </div>
+  </div>
+  <hr class="separators separator__mobile">
+  
+  <!-- Results Section -->
+  <div class = "container">
+    <div class = "meal-wrapper">
+      <div class = "meal-search">
+        <h2 class = "title">Get the food you want</h2>
+        <blockquote>“Get the food you want, from the Tampa cuisine you love, at Uber speed.”<br>
+          <cite>- Uber CEO Dara Khosrowshahi</cite>
+        </blockquote>
+        <!-- <div class = "meal-search-box">
+          <input type = "text" class = "search-control" placeholder="Enter an ingredient" id = "search-input">
+          <button type = "submit" class = "search-btn btn" id = "search-btn">
+            <i class = "fas fa-search"></i>
+          </button>
+        </div> -->
+      </div>
+      <div class = "meal-result">
+        <h2 class = "title">Your Search Results:</h2>
+        <div id= "meal">
+          <!-- meal item -->
+          <!-- <div class = "meal-item">
+            <div class = "meal-img">
+              <img src = "food.jpg" alt = "food">
+            </div>
+            <div class = "meal-name">
+              <h3>Potato Chips</h3>
+              <a href = "#" class = "recipe-btn">Get Recipe</a>
+            </div>
+          </div> -->
+          <!-- end of meal item -->
+        </div>
+      </div>
+      <div class = "meal-details">
+        <!-- recipe close btn -->
+        <button type = "button" class = "btn recipe-close-btn" id = "recipe-close-btn">
+          <i class = "fas fa-times"></i>
+        </button>
+        <!-- meal content -->
+        <div class = "meal-details-content">
+          <!-- <h2 class = "recipe-title">Meals Name Here</h2>
+          <p class = "recipe-category">Category Name</p>
+          <div class = "recipe-instruct">
+            <h3>Instructions:</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo blanditiis quis accusantium natus! Porro, reiciendis maiores molestiae distinctio veniam ratione ex provident ipsa, soluta suscipit quam eos velit autem iste!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet aliquam voluptatibus ad obcaecati magnam, esse numquam nisi ut adipisci in?</p>
+          </div>
+          <div class = "recipe-meal-img">
+            <img src = "food.jpg" alt = "">
+          </div>
+          <div class = "recipe-link">
+            <a href = "#" target = "_blank">Watch Video</a>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
